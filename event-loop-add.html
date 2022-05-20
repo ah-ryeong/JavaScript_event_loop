@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click to add</button>
+
+    <script>
+        const button =  document.querySelector('button');
+
+        button.addEventListener('click', () => {
+            // click 이벤트가 발생하면 아래의 콜백을 Task Queue에 넣어줌
+            // 콜백 안의 코드는 순서에 상관없이 콜백이 콜백스택에 들어가는 순간 이벤트 루프는 
+            // 실행될 때 까지 기다렸다가 나중에 렌더링이 될 때, 전체적으로 적용된 아이들이 레이아웃 페인트에 걸쳐서
+            // 브라우저에 표기 되기 때문임
+
+
+            // 클릭 이벤트 발생시 Web APIs는 해당 콜백 함수를 Task Queue에 보내준다.
+            // 이벤트루프가 돌다가 Task Queue에 있는 이벤트를 Call Stack에 가져옴
+            // 이 콜백함수가 모두 수행될 때 까지 기다렸다가 Call Stack이 다 끝나면 CallStack에서 아이템이 사라지면
+            // 그때서 이벤트 루프는 수정된 사항을 다 적용해서 간 다음에 렌더링 순서로 감
+            const element = document.createElement('h1');
+
+            document.body.appendChild(element);
+            element.style.color = 'red';
+            element.innerText = 'hello';
+        })
+    </script>
+</body>
+</html>
